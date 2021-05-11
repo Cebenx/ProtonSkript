@@ -1,0 +1,95 @@
+options:
+	#Motd (MÓDOSÍTSD!) \n = Új sor
+	motd: &6A szerver a &3Proton&8Script &6felhasználásával készült!
+	
+	#max játékosszám (CSAK SZÁM!)
+	playerc: 20
+	
+	#prefix:
+	pf1: &7[&6Példa szerver&7]
+	
+	#csatlakozási üzenet
+	jm: &e%player% &6csatlakozott a szerverre!
+	
+	#lecsatlakozási üzenet
+	lm: &e%player% &6elhagyta a szervert!
+	
+	#üdvözlőüzenet:
+	wm: &7Üdvözöllek a szerveren!
+	
+#------------------------------------------------------------------------
+#Ez innentől a script kódja! Kérlek ne írj át itt semmit! Köszi!
+#------------------------------------------------------------------------
+
+	ver: &3&nBÉTA 0.1
+	pf: &7[&3Proton&8Script&7]
+	creator: &2&lCebenx
+	
+on server list ping:
+  set motd to "{@motd}"
+  set max player count to {@playerc}
+  
+#----
+
+on join:
+	send "{@wm}"
+	set join message to "{@jm}"
+	
+on quit:
+	set leave message to "{@lm}"
+	
+on load:
+	broadcast "{@pf} &2Sikeresen betöltve!"
+	
+command /parancsok:
+	trigger:
+		send "&6-----{@pf} Parancsok&6-----"
+		send "&8&l/reggel &7--> &fReggel csinálása"
+		send "&8&l/napos &7--> &fNapos idő csinálása"
+		send "&8&l/újratölt &7--> &fSkript újratöltése"
+		send "&8&l/infó &7--> &fSkript infók kiírása"
+		send "&8&l/k &7--> &fKözlemény kiírása"
+		send "&6-----{@pf} Parancsok&6-----"
+	
+command /reggel:
+	permission: proton.reggel
+	permission message: {@noperm}
+	trigger:
+		execute server command "/time set 500"
+		
+command /napos:
+	permission: proton.napos
+	permission message: {@noperm}
+	trigger:
+		execute server command "/weather clear"
+		
+		
+command /újratölt:
+	aliases: /prl
+	permission: proton.ujratolt
+	permission message: {@noperm}
+	trigger:
+		execute server command "/sk reload protonBETA0.1.sk"
+		
+command /infó:
+	trigger:
+		send "&6-----{@pf} Infók&6-----"
+		send "Készítette: {@creator}"
+		send "Verzió: {@ver}"
+		send "&6-----{@pf} Infók&6-----"
+		
+command /k [<text>]:
+    permission: k.use
+    permission message: {@noperm}
+    trigger:
+        if arg 1 is set:
+            broadcast " &8▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀"
+            broadcast ""
+            broadcast "                               {@pf1}"
+            broadcast ""
+            broadcast "  &4&l%argument%"
+            broadcast "&e"
+            broadcast ""
+            broadcast " &8▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀"
+        if arg 1 is not set:
+            message "&c&l<!> &cHasználat: &f/k <üzenet>"
