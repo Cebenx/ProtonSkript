@@ -15,7 +15,7 @@ options:
 	lm: &e%player% &6elhagyta a szervert!
 	
 	#üdvözlőüzenet:
-	wm: &7Üdvözöllek a szerveren!
+	wm: &7Üdvözöllek a szerveren! Kérlek módosítsd a proton skript fájlban ezt az üzenetet! (2-19 sorig)
 	
 #------------------------------------------------------------------------
 #Ez innentől a script kódja! Kérlek ne írj át itt semmit! Köszi!
