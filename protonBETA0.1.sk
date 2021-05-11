@@ -79,7 +79,7 @@ command /infó:
 		send "&6-----{@pf} Infók&6-----"
 		
 command /k [<text>]:
-    permission: k.use
+    permission: proton.k
     permission message: {@noperm}
     trigger:
         if arg 1 is set:
