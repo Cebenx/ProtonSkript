@@ -17,6 +17,9 @@ options:
 	#üdvözlőüzenet:
 	wm: &7Üdvözöllek a szerveren! Kérlek módosítsd a proton skript fájlban ezt az üzenetet! (2-19 sorig)
 	
+	#nincs jogod üzenet:
+	noperm: &4&l<!> &cNincs jogod a parancs használatához! &4&l<!>
+	
 #------------------------------------------------------------------------
 #Ez innentől a script kódja! Kérlek ne írj át itt semmit! Köszi!
 #------------------------------------------------------------------------
@@ -56,12 +59,14 @@ command /reggel:
 	permission message: {@noperm}
 	trigger:
 		execute server command "/time set 500"
+		send "{@pf} &2Reggel sikeresen beállítva!"
 		
 command /napos:
 	permission: proton.napos
 	permission message: {@noperm}
 	trigger:
 		execute server command "/weather clear"
+		send "{@pf} &2Napos idő sikeresen beállítva!"
 		
 		
 command /újratölt:
@@ -93,3 +98,13 @@ command /k [<text>]:
             broadcast " &8▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀"
         if arg 1 is not set:
             message "&c&l<!> &cHasználat: &f/k <üzenet>"
+			
+command /stream [<text>]:
+	permission: proton.stream
+	permission message: {@noperm}
+	trigger:
+		if arg 1 is set:
+			broadcast "{@pf} &7Stream - &2%player% éppen streamel!"
+			broadcast "&8&l%argument%"
+		if arg 1 is not set:
+			send "{@pf} &7Stream - &2Használat: &3&l/stream <link + ha akarsz megjegyzés>"
